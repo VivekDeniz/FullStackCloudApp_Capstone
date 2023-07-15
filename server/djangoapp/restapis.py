@@ -54,13 +54,11 @@ def get_dealers_from_cf(url, **kwargs):
     else:
         json_result = get_request(url)
 
-    # if json_result and "doc" in json_result and "dealerships" in json_result["doc"]:
-    #     # Get the row list in JSON as dealers
-    #     dealerships = json_result["doc"]["dealerships"]
-    #     # For each dealer object
-    #     for dealer in dealerships:
+    # print('json_result from line 31', json_result)    
+
     if json_result:
         # Get the row list in JSON as dealers
+        print("63 - RA",json_result)
         dealers = json_result
         # For each dealer object
         for dealer in dealers:
@@ -69,8 +67,8 @@ def get_dealers_from_cf(url, **kwargs):
             # print(dealer_doc)
             # Create a CarDealer object with values in `doc` object
             dealer_obj = CarDealer(address=dealer_doc["address"], city=dealer_doc["city"],
-                                   id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"],
-                                   full_name=dealer_doc["full_name"],short_name=dealer_doc["short_name"],                               
+                                   id=dealer_doc["id"], lat=dealer_doc["lat"], long=dealer_doc["long"], full_name=dealer_doc["full_name"],
+                                   short_name=dealer_doc["short_name"],                              
                                    st=dealer_doc["st"], zip=dealer_doc["zip"])
             results.append(dealer_obj)
 
@@ -111,6 +109,7 @@ def get_dealers_by_st_from_cf(url, state):
                 long=dealer_doc["long"],
                 short_name=dealer_doc["short_name"],
                 st=dealer_doc["st"],
+                state=dealer_doc["state"],
                 zip=dealer_doc["zip"]
             )
             results.append(dealer_obj)
@@ -145,8 +144,8 @@ def get_dealer_reviews_from_cf(url, **kwargs):
             if "car_year" in dealer_review:
                 review_obj.car_year = dealer_review["car_year"]
             
-            # sentiment = analyze_review_sentiments(review_obj.review)
-            # print(sentiment)
+            sentiment = analyze_review_sentiments(review_obj.review)
+            print(sentiment)
             review_obj.sentiment = analyze_review_sentiments(review_obj.review)
             # review_obj.sentiment = sentiment
             results.append(review_obj)
@@ -158,6 +157,7 @@ def analyze_review_sentiments(text):
     api_key = "bhWLQgmdH9fo3WI-7H-_5UN6yo3g7SQazkk2HL07O0WT"
     authenticator = IAMAuthenticator(api_key)
     natural_language_understanding = NaturalLanguageUnderstandingV1(version='2022-08-01',authenticator=authenticator)
+    natural_language_understanding.set_service_url(url)
     try:
         response = natural_language_understanding.analyze(
             text=text,
