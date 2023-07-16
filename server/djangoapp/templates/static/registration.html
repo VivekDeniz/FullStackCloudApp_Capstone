@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 
+{% block content %}
 <html>
     <head>
         <meta charset="UTF-8">
@@ -42,25 +44,10 @@
         </div>
       </form>
 
-      <form action="{% url 'djangoapp:login' %}" method="post">
-        <div class="container" > 
-          {% csrf_token %}
-          <br>
-          <h1>Login</h1>
-          <hr>
-          <div class="form-group"> 
-              <label for="username"><b>User Name</b></label>
-              <input class="form-control form-control-sm" type="text" placeholder="Username" name="username"> 
-              <br>
-              <label for="username"><b>Password</b></label>
-              <input class="form-control form-control-sm" type="text" placeholder="Password" name="psw">
-              <br>
-              <button class="btn btn-primary" type="submit">Enter</button> 
-          </div>
-        </div>
-      </form>
+     
       
 
       </html>
 
   
+{% endblock %}
