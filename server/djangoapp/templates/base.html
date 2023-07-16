@@ -36,13 +36,14 @@
                   {% else %}
                 <form class="form-inline" action="{% url 'djangoapp:login' %}" method="post">
                     {% csrf_token %}
-                  <input class="form-control" type="text" placeholder="Username" name="username">
-                  <input class="form-control" type="text" placeholder="Password" name="psw">
-                  <button type="submit" class="btn btn-primary">Login</button>
-                  <a  class="btn btn-link" href="{% url 'djangoapp:registration' %}">Sign Up</button>
+                  <input class="form-control form-control-sm" type="text" placeholder="Username" name="username">
+                  <input class="form-control form-control-sm" type="text" placeholder="Password" name="psw">
+                  <button type="submit" class="btn btn-primary btn-sm">Login</button>
+                  <a  class="btn btn-link btm-sm" href="{% url 'djangoapp:registration' %}">Sign Up</button>
                 </form>
-              </div>
                 {% endif %}
+              </div>
+                
             </div>
           </nav>
 
