@@ -23,11 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'ao5z(o(z@cvzodm99d32jkxa5e8a1!q_4sqss5-a%n6tg$#h$+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+try:
+    if os.environ['env_type'] == 'PRODUCTION':
+        DEBUG = False
+except KeyError:
+    DEBUG = True
 
 APPEND_SLASH = True
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "localhost:8000","https://vivekdenisc0-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/"]
+
+CSRF_TRUSTED_ORIGINS = ["https://vivekdenisc0-8000.theiadocker-2-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/"]
 
 
 # Application definition
