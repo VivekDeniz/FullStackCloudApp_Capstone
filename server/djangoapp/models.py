@@ -5,14 +5,7 @@ import uuid
 import json
 
 
-# Create your models here.
-
-# <HINT> Create a Car Make model `class CarMake(models.Model)`:
-# - Name
-# - Description
-# - Any other fields you would like to include in car make model
-# - __str__ method to print a car make object
-
+# CarMake model
 class CarMake(models.Model):
     name = models.CharField(null=False, max_length=100, default='Make')
     description = models.CharField(max_length=500)
@@ -21,14 +14,7 @@ class CarMake(models.Model):
         return "Name: " + self.name
 
 
-# <HINT> Create a Car Model model `class CarModel(models.Model):`:
-# - Many-To-One relationship to Car Make model (One Car Make has many Car Models, using ForeignKey field)
-# - Name
-# - Dealer id, used to refer a dealer created in cloudant database
-# - Type (CharField with a choices argument to provide limited choices such as Sedan, SUV, WAGON, etc.)
-# - Year (DateField)
-# - Any other fields you would like to include in car model
-# - __str__ method to print a car make object
+# CarModel model
 
 class CarModel(models.Model):
     id = models.IntegerField(default=1,primary_key=True)
@@ -59,7 +45,7 @@ class CarModel(models.Model):
 
 
 
-# <HINT> Create a plain Python class `CarDealer` to hold dealer data
+# Plain class holding dealer data
 class CarDealer(models.Model):
     def __init__(self, address, city, full_name, id, lat, long, short_name, st, zip):
         # Dealer address
@@ -84,9 +70,7 @@ class CarDealer(models.Model):
         return "Dealer name: " + self.full_name
 
 
-# <HINT> Create a plain Python class `DealerReview` to hold review data
-# class DealerReview(models.Model):
-
+# Plain class holding review data
 class DealerReview:
 
     def __init__(self, dealership, name, purchase, review):
