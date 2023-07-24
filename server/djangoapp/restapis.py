@@ -7,7 +7,7 @@ from ibm_watson import NaturalLanguageUnderstandingV1
 from ibm_watson.natural_language_understanding_v1 import Features,SentimentOptions
 import time
  
- 
+# Makes HTTP GET requests and returns JSON payload
 def get_request(url, **kwargs):  
     # If argument contain API KEY
     api_key = kwargs.get("api_key")
@@ -34,7 +34,7 @@ def get_request(url, **kwargs):
     json_data = json.loads(response.text)
     return json_data
 
-#post method
+# Makes HTTP POST requests
 def post_request(url, payload, **kwargs):
     print(kwargs)
     print("POST to {} ".format(url))
@@ -45,7 +45,7 @@ def post_request(url, payload, **kwargs):
     json_data = json.loads(response.text)
     return json_data
 
-
+# Queries Cloudant DB with IBM Cloud Function get-dealership
 def get_dealers_from_cf(url, **kwargs):
     results = []
     state = kwargs.get("state")
@@ -73,7 +73,7 @@ def get_dealers_from_cf(url, **kwargs):
             results.append(dealer_obj)
 
     return results
-
+# Get specific dealer with id number
 def get_dealer_by_id_from_cf(url, id):
     json_result = get_request(url, id=id)
     print(json_result)
@@ -94,6 +94,7 @@ def get_dealer_by_id_from_cf(url, id):
         )
     return dealer_obj
 
+# Get all dealerships within specific state
 def get_dealers_by_st_from_cf(url, state):
     results = []
     json_result = get_request(url, st=state)
@@ -115,6 +116,7 @@ def get_dealers_by_st_from_cf(url, state):
             results.append(dealer_obj)
     return results
 
+# Queries Cloudant DB with IBM Cloud Function get-review
 def get_dealer_reviews_from_cf(url, **kwargs):
     results = []
     id = kwargs.get("id")
@@ -152,6 +154,7 @@ def get_dealer_reviews_from_cf(url, **kwargs):
 
     return results
 
+# Uses Waston Natural Language Understanding API to find sentiment of review
 def analyze_review_sentiments(text):
     url = "https://api.us-east.natural-language-understanding.watson.cloud.ibm.com/instances/1e22e444-09dc-4d49-8f66-daaa90780b51"
     api_key = "bhWLQgmdH9fo3WI-7H-_5UN6yo3g7SQazkk2HL07O0WT"
