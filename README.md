@@ -1,36 +1,46 @@
-# Final Project Template
+# Full Stack Cloud Application Project
 
-The final project for this course has several steps that you must complete. 
-To give you an overview of the whole project, all the high-level steps are listed below. 
-The project is then divided into several smaller labs that give the detailed instructions for each step. 
-You must complete all the labs to successfully complete the project.
+**Web Application to review fictious car dealerships**
 
-## Project Breakdown
+## Context
 
-**Prework: Sign up for IBM Cloud account and create a Watson Natural language Understanding service**
-1. Create an IBM cloud account if you don't have one already.
-2. Create an instance of the Natural Language Understanding (NLU) service.
+As part of the final Capstone Project within the IBM Full Stack Cloud Developer Professional Certificate on Coursera, I developed an application. Initially, I received a basic version of the Django application from Coursera, lacking central functionality and templates. My responsibility entailed crafting the front-end views, implementing back-end services, and establishing cloud functions, all while seamlessly integrating them using the Django framework.
 
-**Fork the project Github repository with a project then build and deploy the template project**
-1. Fork the repository in your account
-2. Clone the repository in the theia lab environment
-3. Create static pages to finish the user stories
-4. Deploy the application on IBM Cloud
+## Project Objective
 
-**Add user management to the application**
-1. Implement user management using the Django user authentication system.
-2. Set up continuous integration and delivery
+The main objective was to create a website enabling users to select one of the fictional company "Best Car's" dealerships in the US. On this site, users can access reviews submitted by other users regarding the dealership's cars, and they can also contribute their own reviews. Additionally, the website included essential features such as a navigation bar and static pages for "about" and "contact" information. The project mandated the use of the Python-Django full stack web development framework and required deployment on Red Hat Openshift/Kubernetes hosted on the IBM Cloud.
 
-**Implement backend services**
-1. Create cloud functions to manage dealers and reviews
-2. Create Django models and views to manage car model and car make
-3. Create Django proxy services and views to integrate dealers, reviews, and cars together
+## Architecture
+
+The dealership and review data are stored in an IBM Cloudant database, while information about users and cars resides in a simple SQLite database. To retrieve data from IBM Cloudant, I developed three IBM Cloud Functions that were accessible through an API.
+
+Furthermore, every review undergoes analysis by IBM Watson to determine its overall sentiment, classifying it as negative, neutral, or positive before being displayed.
+
+![image](https://github.com/VivekDeniz/FullStackCloudApp_Capstone/assets/133251644/b55a4adb-8666-4bb8-b9d8-67caa10a97aa)
+
+## Run on your machine 
+
+**Clone project:**
  
-**Add dynamic pages with Django templates**
-1. Create a page that shows all the dealers
-2. Create a page that show reviews for a selected dealer
-3. Create a page that let's the end user add a review for a selected dealer
+ git clone https://github.com/VivekDeniz/agfzb-CloudAppDevelopment_Capstone.git
 
-**Containerize your application**
-1. Add deployment artifacts to your application
-2. Deploy your application
+ cd FullStackCloudApp_Capstone/server
+
+ python3 -m pip install -U -r requirements.txt 
+
+**Start server:**
+
+ python3 manage.py makemigrations djangoapp
+
+ python3 manage.py migrate
+
+ python3 manage.py runserver
+
+**Create superuser:**
+ 
+ python3 manage.py createsuperuser
+
+ (add /admin at the end of url to access admin site)
+ 
+ 
+ 
